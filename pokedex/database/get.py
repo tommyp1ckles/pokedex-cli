@@ -11,14 +11,14 @@ from .. import resource_path
 def download_database():
     target = os.path.join(resource_path, "veekun-pokedex.sqlite")
     url = "http://veekun.com/static/pokedex/downloads/veekun-pokedex.sqlite.gz"
-    
+
     if os.path.isfile(target):
         return
 
     request = requests.get(url, stream=True)
     total_length = int(request.headers.get("content-length"))
     bytes_done = 0
-    gzipped = ""
+    gzipped = bytearray()
 
     print("Downloading Veekun Pokédex database...")
     with ProgressBar(max_value=total_length) as bar:

@@ -22,7 +22,7 @@ class Buffer(object):
         assert x < self.width
         assert y < self.height
 
-        assert type(character) in (str, unicode)
+        assert type(character) in (bytes, str)
         if len(character) == 0:
             character = " "
 
