@@ -18,13 +18,13 @@ def download_database():
     request = requests.get(url, stream=True)
     total_length = int(request.headers.get("content-length"))
     bytes_done = 0
-    gzipped = bytearray()
+    gzipped = ""
 
     print("Downloading Veekun Pokédex database...")
     with ProgressBar(max_value=total_length) as bar:
         for chunk in request.iter_content(chunk_size=1024):
             if chunk:
-                gzipped += chunk
+                gzipped += chunk.decode()
                 bytes_done += len(chunk)
                 bar.update(bytes_done)
 
