@@ -69,13 +69,17 @@ type_colors = {
 
 
 def draw_image(buffer, path, x0=0, y0=0):
-    image = Image.open(path).convert("RGB")
+    image = Image.open(path).convert("RGBA")
     pixels = image.load()
     width, height = image.size
 
     for y in range(0, height, 2):
         for x in range(width):
             if x + x0 < buffer.width and y + y0 < buffer.height * 2:
+
+                if not pixels[x,y][3] or not pixels[x,y+1][3]:
+                    continue
+
                 color_top = rgb_to_xterm(pixels[x, y])
                 color_bottom = rgb_to_xterm(pixels[x, y + 1])
 

@@ -3,7 +3,7 @@
 from .conversion import rgb2short
 
 def rgb_to_xterm(color):
-    hex_color = "%02x%02x%02x" % color
+    hex_color = "%02x%02x%02x" % (color[0], color[1], color[2])
     return int(rgb2short(hex_color)[0])
 
 reset_code = "\033[0m"
